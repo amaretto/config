@@ -2,12 +2,9 @@
 "If you change this file, you should cp this file to ~/work/misc and commit
 
 "set encofing UTF-8
+set encoding=utf-8
 set fenc=utf-8
-"do not generate backup file like ~hoge.py
-set nobackup
-"do not generate swap file like hoge.py.swp
-set noswapfile
-"reflect changes if the opened file is changed by another person or processes. 
+"do not generate backup file like ~hoge.py set nobackup "do not generate swap file like hoge.py.swp set noswapfile "reflect changes if the opened file is changed by another person or processes. 
 set autoread
 "allow change buffers without any saves
 set hidden
@@ -39,8 +36,8 @@ hi SpecialKey ctermfg=darkmagenta
 set list
 set listchars=eol:¬,tab:▸\ 
 "set tabstop size
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 "ignore uppercase and lowercase when searching
 set ignorecase
@@ -52,15 +49,18 @@ set incsearch
 set wrapscan
 "highlight searched words
 set hlsearch
+"move pre row
+set bs=2
 
 "activate syntax
 syntax enable
 
 "vim-plugin
 call plug#begin('~/.vim/plugged')
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'fatih/molokai'
 Plug 'SirVer/ultisnips'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
 "--- golang---
@@ -70,18 +70,32 @@ let g:go_fmt_command = "goimports"
 let g:go_metalinter_enabled =['vet','golint','errcheck']
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_deadline = "5s"
-"Unfortunatory, vim-go hilights doesn't work on iTerm...
-"let g:go_hilight_function = 1
-"let g:go_hilight_methods = 1
-"let g:go_hilight_structs = 1
-"let g:go_hilight_types = 1
-"let g:go_hilight_operators = 1
+"auto hilights for identifier
+let g:go_auto_sameids = 1
 set autowrite
 "keymap
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+"for :GoAlternate
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
-"--- UltiSnips ---
+"--- UltiSnips(for glang) ---
 let g:UltiSnipsExpandTrigger="<tab>"
+
+"--- NERDTree ---
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+"--- control buffer ---
+nnoremap <silent> <C-j> :bprev<CR>
+nnoremap <silent> <C-k> :bnext<CR>
+
+"--- vim-terraform ---
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
+
