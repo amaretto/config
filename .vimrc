@@ -1,6 +1,4 @@
-"ATTENSION"
-"If you change this file, you should cp this file to ~/work/misc and commit
-
+"--- vim ---
 "set encofing UTF-8
 set encoding=utf-8
 set fenc=utf-8
@@ -55,13 +53,21 @@ set bs=2
 "activate syntax
 syntax enable
 
-"vim-plugin
+
+"--- vim-plugin ---
 call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'fatih/molokai'
 Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
+
 
 "--- golang---
 " formatting golang source
@@ -84,19 +90,25 @@ autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit'
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
+
 "--- UltiSnips(for glang) ---
 let g:UltiSnipsExpandTrigger="<tab>"
 
+
 "--- NERDTree ---
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
 
 "--- control buffer ---
 nnoremap <silent> <C-j> :bprev<CR>
 nnoremap <silent> <C-k> :bnext<CR>
 
+
 "--- vim-terraform ---
 let g:terraform_align=1
-let g:terraform_fold_sections=1
 let g:terraform_fmt_on_save=1
 
 
+"--- vim-airline ---
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
