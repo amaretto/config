@@ -66,6 +66,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+" vim-lsp
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 call plug#end()
 
 
@@ -73,7 +77,7 @@ call plug#end()
 " formatting golang source
 let g:go_fmt_command = "goimports"
 " checking code
-let g:go_metalinter_enabled =['vet','golint','errcheck']
+let g:go_metalinter_enabled =['vet','golint']
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_deadline = "5s"
 "auto hilights for identifier
@@ -90,6 +94,20 @@ autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit'
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
+" deopelete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+"--- vim-lsp ---
+let g:lsp_async_completion = 1
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
 
 "--- UltiSnips(for glang) ---
 let g:UltiSnipsExpandTrigger="<tab>"
