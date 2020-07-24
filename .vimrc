@@ -14,8 +14,7 @@ set number
 hi LineNr ctermbg=0 ctermfg=258
 "hi CursorLineNr ctermfg=11 term=bold
 set cursorline
-"hi clear CursorLine
-"show cursored column
+"hi clear CursorLine "show cursored column
 set cursorcolumn
 "allow cursor next to eol
 set virtualedit=onemore
@@ -68,6 +67,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
+Plug 'thinca/vim-quickrun'
+Plug 'SirVer/ultisnips'
 " lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -143,8 +144,15 @@ let g:lsp_diagnostics_echo_cursor = 1
 
 " async completion
 let g:asyncomplete_auto_popup=1
-let g:asyncomplete_auto_completeopt = 0
+"let g:asyncomplete_auto_completeopt = 0
 let g:asyncomplete_popup_delay = 500
+
+" ### UltiSnips ###
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
+
 
 " ### ale ###
 let g:ale_fix_on_save = 1
