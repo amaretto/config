@@ -1,3 +1,209 @@
 snippet hello "Hello World" b
 fmt.Println("Hello Word")
 endsnippet
+
+###########
+### dev ###
+###########
+
+
+##############
+### procon ###
+##############
+
+## scanner ## 
+snippet sc "scanner" b
+const (
+	initialBufSize = 10000
+	maxBufSize     = 100000000
+)
+
+var sc *bufio.Scanner = func() *bufio.Scanner {
+	sc := bufio.NewScanner(os.Stdin)
+	buf := make([]byte, initialBufSize)
+	sc.Buffer(buf, maxBufSize)
+	return sc
+}()
+endsnippet
+
+snippet scani "scan number" b
+func scanIntNum() (num int) {
+	sc.Scan()
+
+	num, e := strconv.Atoi(sc.Text())
+	if e != nil {
+		panic(e)
+	}
+	return num
+}
+endsnippet
+
+snippet scanis "scan numbers" b
+func scanIntNums() (nums []int) {
+	sc.Scan()
+	numString := strings.Split(sc.Text(), " ")
+
+	nums = make([]int, len(numString))
+	var err error
+
+	for i := 0; i < len(nums); i++ {
+		nums[i], err = strconv.Atoi(numString[i])
+		if err != nil {
+			panic(err)
+		}
+	}
+	return nums
+}
+
+endsnippet
+snippet scans "scan string" b
+func scanString() (s string) {
+	sc.Scan()
+	return sc.Text()
+}
+endsnippet
+
+snippet scanss "scan strings" b
+func scanStrings() []string {
+	sc.Scan()
+	return strings.Split(sc.Text(), " ")
+}
+endsnippet
+
+## calcs ## 
+snippet absi "return absolute value" b
+func abs(x int) int {
+	if x < 0 {
+		x = -x
+	}
+	return x
+}
+endsnippet
+
+snippet largeri "return larger int value" b
+func larger(a, b int) int {
+	if a < b {
+		return b
+	} else {
+		return a
+	}
+}
+endsnippet
+
+snippet smalleri "return smaller int value" b
+func smaller(a, b int) int {
+	if a > b {
+		return b
+	} else {
+		return a
+	}
+}
+endsnippet
+
+snippet maxi "return maxisimum int value" b
+func max(a []int) int {
+	x := a[0]
+	for i := 0; i < len(a); i++ {
+		if x < a[i] {
+			x = a[i]
+		}
+	}
+	return x
+}
+endsnippet
+
+snippet mini "return minmum int value" b
+func min(a []int) int {
+	x := a[0]
+	for i := 0; i < len(a); i++ {
+		if x > a[i] {
+			x = a[i]
+		}
+	}
+	return x
+}
+endsnippet
+
+## sort ## 
+snippet sortis "scan strings" b
+func sortIntStable(nums []int) []int {
+	// Sort Slice
+	sort.SliceStable(nums, func(i, j int) bool { return nums[i] < nums[j] })
+	return nums
+}
+endsnippet
+
+## prime number ##
+snippet ip "is prime number" b
+// isPrimeSmart checks if the target is prime number by Sieve of Eratosthenes
+func isPrimeSmart(target int) bool {
+	limit := int(math.Sqrt(float64(target)))
+	nums := make([]int, limit)
+
+	if target < 2 {
+		return false
+	}
+	//init
+	for i := 0; i < limit; i++ {
+		if i == 0 {
+			continue
+		}
+		nums[i] = i + 1
+	}
+
+	for i := 1; i < limit; i++ {
+		// skip sieved numbers
+		if nums[i] == 0 {
+			continue
+		}
+		// check prime
+		if target%nums[i] == 0 {
+			return false
+		}
+		//sieves numbers
+		for j := nums[i]; j < limit; j += j {
+			nums[j] = 0
+		}
+	}
+
+	return true
+}
+endsnippet
+
+
+## permutation
+snippet genperm "generate permutation patterns" b
+func main() {
+	pattern := order(8)
+	fmt.Println(pattern)
+}
+
+func order(size int) [][]int {
+	rest := make([]int, size)
+	var head []int
+	for i := 0; i < size; i++ {
+		rest[i] = i
+	}
+	return perm(head, rest)
+}
+
+func perm(head, rest []int) [][]int {
+	var res [][]int
+	if len(rest) == 0 {
+		res = append(res, head)
+		return res
+	}
+	for i := 0; i < len(rest); i++ {
+		restx := make([]int, len(rest))
+		headx := make([]int, len(head)) //
+		copy(restx, rest)
+		copy(headx, head) //
+		headx = append(headx, restx[i])
+		restx = append(restx[:i], restx[i+1:]...)
+		res = append(res, perm(headx, restx)...)
+	}
+	return res
+}
+endsnippet
+
+

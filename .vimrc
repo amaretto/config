@@ -76,6 +76,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-lsp-icons'
+Plug 'mattn/vim-goimports'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 call plug#end()
@@ -166,11 +167,13 @@ let g:ale_fixers = {
 "### golang ###
 " formatting golang source
 let g:go_fmt_command = "goimports"
+"let g:goimports = 1
+"let g:goimports_simplify = 1
 " checking code
 let g:go_metalinter_enabled = ['vet','golint']
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_deadline = "5s"
-"auto hilights for identifier
+"let g:go_metalinter_autosave = 1
+"let g:go_metalinter_deadline = "5s"
+""auto hilights for identifier
 let g:go_auto_sameids = 1
 let g:go_term_mode = 'split'
 set autowrite
