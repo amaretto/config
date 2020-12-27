@@ -69,6 +69,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
 Plug 'thinca/vim-quickrun'
 Plug 'SirVer/ultisnips'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 " lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -101,9 +104,9 @@ nnoremap <silent> <C-k> :bnext<CR>
 "########################"
 "#        files         #"
 "########################"
-"--- NERDTree ---
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-
+"--- Fern ---
+let g:fern#renderer = 'nerdfont'
+nnoremap ,t :<c-u>Fern . -drawer -stay -keep -toggle -reveal=%<cr>
 
 "########################"
 "#      programming     #"
