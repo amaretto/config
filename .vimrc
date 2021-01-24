@@ -59,7 +59,6 @@ syntax enable
 call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'fatih/molokai'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -70,8 +69,16 @@ Plug 'dense-analysis/ale'
 Plug 'thinca/vim-quickrun'
 Plug 'SirVer/ultisnips'
 Plug 'lambdalisue/nerdfont.vim'
+" filer
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+" command pallete
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/ctrlp-matchfuzzy'
+Plug 'mattn/ctrlp-git'
+Plug 'mattn/ctrlp-launcher'
+Plug 'mattn/ctrlp-lsp'
+Plug 'mattn/ctrlp-yo'
 " lsp
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -97,8 +104,8 @@ let g:airline_powerline_fonts = 1
 "#      controlls       #"
 "########################"
 "--- control buffer ---
-nnoremap <silent> <C-j> :bprev<CR>
-nnoremap <silent> <C-k> :bnext<CR>
+nnoremap <silent> <C-k> :bprev<CR>
+nnoremap <silent> <C-j> :bnext<CR>
 
 
 "########################"
@@ -107,6 +114,15 @@ nnoremap <silent> <C-k> :bnext<CR>
 "--- Fern ---
 let g:fern#renderer = 'nerdfont'
 nnoremap ,t :<c-u>Fern . -drawer -stay -keep -toggle -reveal=%<cr>
+
+"########################"
+"#   command pallete    #"
+"########################"
+"--- ctrlp-launcer ---
+nmap <c-e> <plug>(ctrlp-launcher)
+nnoremap ,g :<c-u>CtrlPGitFiles<cr>
+nnoremap ,, :<c-u>CtrlPMRUFiles<cr>
+"nnoremap ,v :<c-u>CtrlPLauncher lsp<cr>
 
 "########################"
 "#      programming     #"
