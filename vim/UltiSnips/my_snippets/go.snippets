@@ -6,10 +6,32 @@ endsnippet
 ### dev ###
 ###########
 
+## test ## 
+snippet test "test code template" b
+var testCases = []struct {
+	input int
+	want   int
+}{
+	{0, 0},
+}
+
+func TestFunction(t *testing.T) {
+	for _, testCase := range testCases {
+		result := function(testCase.input)
+		if result != testCase.want{
+			t.Errorf("invalid result. testCase:%v, actual:%v", testCase, result)
+		}
+	}
+}
+endsnippet
+
 
 ##############
 ### procon ###
 ##############
+#
+# code from https://github.com/amaretto/toolbox
+#
 
 ## scanner ## 
 snippet sc "scanner" b
@@ -22,51 +44,34 @@ var sc *bufio.Scanner = func() *bufio.Scanner {
 	sc := bufio.NewScanner(os.Stdin)
 	buf := make([]byte, initialBufSize)
 	sc.Buffer(buf, maxBufSize)
+	// Release comment out if you need scan each words
+	// sc.Split(bufio.ScanWords)
 	return sc
 }()
+
+func scanString() string    { sc.Scan(); return sc.Text() }
+func scanInt() int { n, _ := strconv.Atoi(scanString()); return n }
 endsnippet
 
-snippet scani "scan number" b
-func scanIntNum() (num int) {
-	sc.Scan()
-
-	num, e := strconv.Atoi(sc.Text())
-	if e != nil {
-		panic(e)
-	}
-	return num
-}
-endsnippet
-
-snippet scanis "scan numbers" b
-func scanIntNums() (nums []int) {
-	sc.Scan()
-	numString := strings.Split(sc.Text(), " ")
-
-	nums = make([]int, len(numString))
-	var err error
-
-	for i := 0; i < len(nums); i++ {
-		nums[i], err = strconv.Atoi(numString[i])
-		if err != nil {
-			panic(err)
-		}
-	}
-	return nums
-}
-
-endsnippet
 snippet scans "scan string" b
-func scanString() (s string) {
-	sc.Scan()
-	return sc.Text()
-}
+func scanString() string    { sc.Scan(); return sc.Text() }
 endsnippet
 
 snippet scanss "scan strings" b
-func scanStrings() []string {
-	sc.Scan()
-	return strings.Split(sc.Text(), " ")
+func scanStrings() []string { sc.Scan(); return strings.Split(sc.Text(), " ") }
+endsnippet
+
+snippet scani "scan number" b
+func scanInt() int { n, _ := strconv.Atoi(scanString()); return n }
+endsnippet
+
+snippet scanis "scan numbers" b
+func scanInts(n int) []int {
+	ns := make([]int, n)
+	for i := 0; i < n; i++ {
+		ns[i] = scanInt()
+	}
+	return ns
 }
 endsnippet
 
@@ -80,47 +85,38 @@ func abs(x int) int {
 }
 endsnippet
 
-snippet largeri "return larger int value" b
-func larger(a, b int) int {
-	if a < b {
-		return b
-	} else {
-		return a
-	}
-}
-endsnippet
-
-snippet smalleri "return smaller int value" b
-func smaller(a, b int) int {
+snippet maxi "return larger int value" b
+func maxInt(a, b int) int {
 	if a > b {
-		return b
-	} else {
 		return a
 	}
+	return b
 }
 endsnippet
 
-snippet maxi "return maxisimum int value" b
-func max(a []int) int {
-	x := a[0]
-	for i := 0; i < len(a); i++ {
-		if x < a[i] {
-			x = a[i]
+snippet maxis "return maxisimum int value" b
+func maxInts(a []int) int {
+	// Set max value
+	var max int
+	for _, n := range a {
+		if n > max {
+			max = n
 		}
 	}
-	return x
+	return max
 }
 endsnippet
 
-snippet mini "return minmum int value" b
-func min(a []int) int {
-	x := a[0]
-	for i := 0; i < len(a); i++ {
-		if x > a[i] {
-			x = a[i]
+snippet minis "return minmum int value" b
+func minInts(a []int) int {
+	// Set min value
+	var min int
+	for _, n := range a {
+		if n < min {
+			min = n
 		}
 	}
-	return x
+	return min
 }
 endsnippet
 
@@ -134,7 +130,7 @@ func sortIntStable(nums []int) []int {
 endsnippet
 
 ## prime number ##
-snippet ip "is prime number" b
+snippet isprime "is prime number" b
 // isPrimeSmart checks if the target is prime number by Sieve of Eratosthenes
 func isPrimeSmart(target int) bool {
 	limit := int(math.Sqrt(float64(target)))

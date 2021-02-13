@@ -69,6 +69,8 @@ Plug 'dense-analysis/ale'
 Plug 'thinca/vim-quickrun'
 Plug 'SirVer/ultisnips'
 Plug 'lambdalisue/nerdfont.vim'
+" rust
+Plug 'rust-lang/rust.vim'
 " filer
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
@@ -222,6 +224,16 @@ augroup MyLsp
         \})
   endif
 augroup END
+
+"### Rust ###
+let g:rustfmt_autosave = 1
+"if executable('rls')
+"  au User lsp_setup call lsp#register_server({
+"      \ 'name': 'rls',
+"      \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+"      \ 'whitelist': ['rust'],
+"      \ })
+"endif
 
 "########################"
 "#         IaC          #"
