@@ -44,8 +44,7 @@ var sc *bufio.Scanner = func() *bufio.Scanner {
 	sc := bufio.NewScanner(os.Stdin)
 	buf := make([]byte, initialBufSize)
 	sc.Buffer(buf, maxBufSize)
-	// Release comment out if you need scan each words
-	// sc.Split(bufio.ScanWords)
+	sc.Split(bufio.ScanWords)
 	return sc
 }()
 
