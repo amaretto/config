@@ -48,6 +48,8 @@ set wrapscan
 set hlsearch
 "move pre row
 set bs=2
+"yank to clipboard
+set clipboard+=unnamed
 
 "activate syntax
 syntax enable
